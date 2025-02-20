@@ -4,11 +4,8 @@ import exceptions.SaldoInsuficienteException;
 
 public class ContaPoupanca extends Conta {
    
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	// Taxa de transferência menor para conta poupança (por exemplo, 1%)
+	
     private static final double TAXA_TRANSFERENCIA = 0.01; 
 
     public ContaPoupanca(String numeroConta) {

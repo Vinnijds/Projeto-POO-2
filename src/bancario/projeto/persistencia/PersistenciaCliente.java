@@ -23,6 +23,7 @@ public class PersistenciaCliente {
     public PersistenciaCliente() {
         clientes = carregarClientes();
     }
+    
 
     private ArrayList<Cliente> carregarClientes() {
         File file = new File(arquivo);
@@ -43,8 +44,8 @@ public class PersistenciaCliente {
         }
         return new ArrayList<>();
     }
+    
 
-    // Método para listar contas do cliente
     public void listarContasDoCliente(String cpf) {
         Cliente cliente = localizarClientePorCpf(cpf); // Busca o cliente pelo CPF
         if (cliente != null) {
@@ -54,7 +55,7 @@ public class PersistenciaCliente {
             } else {
                 System.out.println("Contas do cliente " + cliente.getNome() + ":");
                 for (Conta conta : contas) {
-                    System.out.println(" - Número da conta: " + conta.getNumeroConta() + ", Saldo: R$ " + conta.consultarSaldo());
+                    System.out.println( conta.getClass().getSimpleName() + " - Número da conta: " + conta.getNumeroConta() + ", Saldo: R$ " + conta.consultarSaldo());
                 }
             }
         } else {
@@ -62,6 +63,7 @@ public class PersistenciaCliente {
         }
     }
 
+    
     private void salvarClientes() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(arquivo))) {
             oos.writeObject(clientes);
@@ -70,11 +72,12 @@ public class PersistenciaCliente {
         }
     }
     
-    // Método público para atualizar os dados dos clientes.
-    public void atualizarClientes() {
+    
+    public void atualizarClientes() {			// Método público para atualizar os dados dos clientes.
         salvarClientes();
     }
 
+    
     public void adicionarCliente(Cliente cliente) {
         if (!clientes.contains(cliente)) {
             clientes.add(cliente);
@@ -84,6 +87,7 @@ public class PersistenciaCliente {
             System.out.println("Cliente já cadastrado.");
         }
     }
+    
 
     public void listarClientes() {
         if (clientes.isEmpty()) {
@@ -95,6 +99,7 @@ public class PersistenciaCliente {
         }
     }
 
+    
     public Cliente localizarClientePorCpf(String cpf) {
         for (Cliente cliente : clientes) {
             if (cliente.getCpf().equals(cpf)) {
@@ -104,6 +109,7 @@ public class PersistenciaCliente {
         return null;
     }
 
+    
     public void removerCliente(Cliente cliente) {
         if (clientes.remove(cliente)) {
             salvarClientes();
@@ -113,6 +119,7 @@ public class PersistenciaCliente {
         }
     }
 
+    
     public void criarContaParaCliente(String cpf, String numeroConta, String tipoConta) {
         Cliente cliente = localizarClientePorCpf(cpf);
         if (cliente != null) {
@@ -133,6 +140,7 @@ public class PersistenciaCliente {
         }
     }
 
+    
     public void realizarDeposito(String cpf, String numeroConta, double valor) {
         Cliente cliente = localizarClientePorCpf(cpf);
         if (cliente != null) {
@@ -150,6 +158,7 @@ public class PersistenciaCliente {
         }
     }
 
+    
     public void realizarSaque(String cpf, String numeroConta, double valor) {
         Cliente cliente = localizarClientePorCpf(cpf);
         if (cliente != null) {
@@ -171,6 +180,7 @@ public class PersistenciaCliente {
         }
     }
 
+    
     public void realizarTransferencia(String cpfOrigem, String numeroContaOrigem, String cpfDestino, String numeroContaDestino, double valor) {
         Cliente clienteOrigem = localizarClientePorCpf(cpfOrigem);
         Cliente clienteDestino = localizarClientePorCpf(cpfDestino);
@@ -224,6 +234,31 @@ public class PersistenciaCliente {
             System.out.println("Cliente não encontrado.");
         }
     }
+    
+    
+
+    public void removerConta(String cpf, String numeroConta) {
+        Cliente cliente = localizarClientePorCpf(cpf);
+        if (cliente != null) {
+            Conta contaParaRemover = null;
+            for (Conta conta : cliente.getContas()) {
+                if (conta.getNumeroConta().equals(numeroConta)) {
+                    contaParaRemover = conta;
+                    break;
+                }
+            }
+            if (contaParaRemover != null) {
+                cliente.getContas().remove(contaParaRemover);
+                salvarClientes();
+                System.out.println("Conta removida com sucesso.");
+            } else {
+                System.out.println("Conta não encontrada.");
+            }
+        } else {
+            System.out.println("Cliente não encontrado.");
+        }
+    }
+
 
     public void consultarBalanco(String cpf) {
         Cliente cliente = localizarClientePorCpf(cpf); // Busca o cliente pelo CPF

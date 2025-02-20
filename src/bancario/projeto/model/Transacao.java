@@ -3,10 +3,6 @@ package bancario.projeto.model;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Classe que representa uma transação realizada em uma conta.
- * Dentro dela, temos o enum TipoTransacao.
- */
 public class Transacao implements Serializable {
     private static final long serialVersionUID = 1L;
     
@@ -17,7 +13,7 @@ public class Transacao implements Serializable {
     public Transacao(TipoTransacao tipo, double valor) {
         this.tipo = tipo;
         this.valor = valor;
-        this.data = new Date(); // Registra a data/hora da transação
+        this.data = new Date(); // Registra data e hora da transação
     }
     
     public TipoTransacao getTipo() {
@@ -41,12 +37,20 @@ public class Transacao implements Serializable {
                '}';
     }
     
-    /**
-     * Enum que define os tipos de transação.
-     */
-    public enum TipoTransacao {
-        DEPOSITO,
-        SAQUE,
-        TRANSFERENCIA
+     
+     
+    public enum TipoTransacao {					//Define os tipos de transação
+        DEPOSITO(1),
+        SAQUE(2),
+        TRANSFERENCIA(3);
+        
+        private final int valor;
+    	
+    	private TipoTransacao(int valor) {
+    		this.valor = valor;
+    }
+    public int getValor() {
+    	return valor;
+    }
     }
 }

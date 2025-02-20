@@ -15,7 +15,7 @@ public class Programa {
         do {
             System.out.println("===== Menu =====");
             System.out.println("1. Registrar Cliente");
-            System.out.println("2. Exibir Clientes");
+            System.out.println("2. Listar Clientes");
             System.out.println("3. Buscar Cliente por CPF");
             System.out.println("4. Deletar Cliente");
             System.out.println("5. Adicionar Conta para Cliente");
@@ -25,7 +25,8 @@ public class Programa {
             System.out.println("9. Consultar Saldo da Conta");
             System.out.println("10. Listar Contas de um Cliente");
             System.out.println("11. Consultar Balanço de Contas");
-            System.out.println("12. Imprimir Extrato da Conta");
+            System.out.println("12. Imprimir Extrato Bancario");
+            System.out.println("13. Deletar Conta");
             System.out.println("0. Sair");
             System.out.print("Escolha uma Opção: ");
 
@@ -47,11 +48,15 @@ public class Programa {
                     System.out.println("Pressione Enter para continuar...");
                     sc.nextLine();
                     break;
+                    
+                    
                 case 2:
                     persistencia.listarClientes();
                     System.out.println("Pressione Enter para continuar...");
                     sc.nextLine();
                     break;
+                    
+                    
                 case 3:
                     System.out.print("CPF: ");
                     String cpfConsulta = sc.nextLine();
@@ -64,6 +69,8 @@ public class Programa {
                     System.out.println("Pressione Enter para continuar...");
                     sc.nextLine();
                     break;
+                    
+                    
                 case 4:
                     System.out.print("CPF: ");
                     String cpfRemover = sc.nextLine();
@@ -76,6 +83,8 @@ public class Programa {
                     System.out.println("Pressione Enter para continuar...");
                     sc.nextLine();
                     break;
+                    
+                    
                 case 5:
                     System.out.print("CPF do Cliente: ");
                     String cpfConta = sc.nextLine();
@@ -97,7 +106,7 @@ public class Programa {
                     String tipoConta = null;
                     switch (opcaoConta) {
                         case 1:
-                            tipoConta = "Corrente"; // ou "Bancaria", conforme a lógica do seu sistema
+                            tipoConta = "Corrente";
                             break;
                         case 2:
                             tipoConta = "Poupanca";
@@ -116,6 +125,7 @@ public class Programa {
                     sc.nextLine();
                     break;
 
+                    
                 case 6:
                     System.out.print("CPF do Cliente: ");
                     String cpfDeposito = sc.nextLine();
@@ -133,6 +143,8 @@ public class Programa {
                     System.out.println("Pressione Enter para continuar...");
                     sc.nextLine();
                     break;
+                    
+                    
                 case 7:
                     System.out.print("CPF do Cliente: ");
                     String cpfSaque = sc.nextLine();
@@ -150,6 +162,8 @@ public class Programa {
                     System.out.println("Pressione Enter para continuar...");
                     sc.nextLine();
                     break;
+                    
+                    
                 case 8:
                     System.out.print("CPF do Cliente de Origem: ");
                     String cpfOrigem = sc.nextLine();
@@ -171,6 +185,8 @@ public class Programa {
                     System.out.println("Pressione Enter para continuar...");
                     sc.nextLine();
                     break;
+                    
+                    
                 case 9:
                     System.out.print("CPF do Cliente: ");
                     String cpfSaldo = sc.nextLine();
@@ -180,6 +196,8 @@ public class Programa {
                     System.out.println("Pressione Enter para continuar...");
                     sc.nextLine();
                     break;
+                    
+                    
                 case 10:
                     System.out.print("Digite o CPF do cliente: ");
                     String cpfListarContas = sc.nextLine();
@@ -187,6 +205,8 @@ public class Programa {
                     System.out.println("Pressione Enter para continuar...");
                     sc.nextLine();
                     break;
+                    
+                    
                 case 11:
                     System.out.print("Digite o CPF do cliente: ");
                     String cpfBalanco = sc.nextLine();
@@ -194,6 +214,8 @@ public class Programa {
                     System.out.println("Pressione Enter para continuar...");
                     sc.nextLine();
                     break;
+                    
+                    
                 case 12:
                     System.out.print("CPF do Cliente: ");
                     String cpfExtrato = sc.nextLine();
@@ -218,6 +240,18 @@ public class Programa {
                     System.out.println("Pressione Enter para continuar...");
                     sc.nextLine();
                     break;
+                    
+                    
+                case 13:
+                    System.out.print("CPF do Cliente: ");
+                    String cpfRemoverConta = sc.nextLine();
+                    System.out.print("Número da Conta: ");
+                    String numeroContaRemover = sc.nextLine();
+                    persistencia.removerConta(cpfRemoverConta, numeroContaRemover);
+                    System.out.println("Pressione Enter para continuar...");
+                    sc.nextLine();
+                    break;
+  
 
                 case 0:
                     System.out.println("Saindo...");

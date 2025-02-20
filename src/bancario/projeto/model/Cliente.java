@@ -16,35 +16,42 @@ public class Cliente implements Serializable {
         this.contas = new ArrayList<>();
     }
 
+    
     public String getCpf() {
         return cpf;
     }
 
+    
     public String getNome() {
         return nome;
     }
 
+    
     public List<Conta> getContas() {
         return contas;
     }
 
+    
     public void adicionarConta(Conta conta) {
         contas.add(conta);
     }
 
+    
     @Override
     public String toString() {
         return "Cliente{cpf='" + cpf + "', nome='" + nome + "'}";
     }
 
+    
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object obj) {					//considera dois clientes com CPF iguais
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Cliente cliente = (Cliente) obj;
         return cpf.equals(cliente.cpf);
     }
 
+    
     @Override
     public int hashCode() {
         return cpf.hashCode();

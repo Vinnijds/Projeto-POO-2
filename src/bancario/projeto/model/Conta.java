@@ -6,11 +6,11 @@ import java.util.List;
 
 import exceptions.SaldoInsuficienteException;
 
-public abstract class Conta implements IConta, Serializable {
+public abstract class Conta implements IConta, Serializable {	
     private static final long serialVersionUID = 1L;
     private String numeroConta;
-    protected double saldo; // protegido para acesso nas subclasses
-    protected List<Transacao> extrato; // Lista de transações da conta
+    protected double saldo; 									// protegido para acesso nas subclasses
+    protected List<Transacao> extrato; 							// Lista de transações da conta
 
     public Conta(String numeroConta) {
         this.numeroConta = numeroConta;
@@ -27,12 +27,12 @@ public abstract class Conta implements IConta, Serializable {
         return saldo;
     }
     
-    // Método para registrar uma transação
+   
     protected void registrarTransacao(Transacao.TipoTransacao tipo, double valor) {
         extrato.add(new Transacao(tipo, valor));
     }
     
-    // Métodos auxiliares para manipulação do saldo sem registro automático
+   
     protected void retirarSaldo(double valor) throws SaldoInsuficienteException {
         if (valor > 0 && saldo >= valor) {
             saldo -= valor;
@@ -41,13 +41,14 @@ public abstract class Conta implements IConta, Serializable {
         }
     }
     
+    
     protected void adicionarSaldo(double valor) {
         if (valor > 0) {
             saldo += valor;
         }
     }
     
-    // Método para imprimir o extrato da conta
+    
     public void imprimirExtrato() {
         System.out.println("Extrato da conta " + numeroConta + ":");
         if (extrato.isEmpty()) {
@@ -59,9 +60,9 @@ public abstract class Conta implements IConta, Serializable {
         }
     }
     
-    // Depósito: atualiza saldo e registra transação como DEPOSITO
+   
     @Override
-    public void depositar(double valor) {
+    public void depositar(double valor) {					 // Depósito atualiza saldo e registra transação como DEPOSITO
         if (valor > 0) {
             adicionarSaldo(valor);
             registrarTransacao(Transacao.TipoTransacao.DEPOSITO, valor);
@@ -70,14 +71,14 @@ public abstract class Conta implements IConta, Serializable {
         }
     }
     
-    // Saque: atualiza saldo e registra transação como SAQUE
+    
     @Override
-    public void sacar(double valor) throws SaldoInsuficienteException {
+    public void sacar(double valor) throws SaldoInsuficienteException {			// Saque, atualiza saldo e registra transação como SAQUE
         retirarSaldo(valor);
         registrarTransacao(Transacao.TipoTransacao.SAQUE, valor);
     }
 
-    // Método transferir permanece abstrato para que cada conta implemente sua lógica
+    
     @Override
     public abstract void transferir(double valor, Conta destino) throws SaldoInsuficienteException;
 
